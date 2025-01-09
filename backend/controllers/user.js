@@ -43,3 +43,33 @@ export const signup = async(req,res)=>{
         })
     }
 }
+
+
+const signinSchema = z.object({
+    username:z.string().email(),
+    password:z.string()
+})
+
+export const signin = async(req,res)=>{
+    const body = req.body;
+    const result = signinSchema.safeParse(body);
+    if(!result.success) {
+        return res.json({
+            message:"mails input is incorrect"
+            })
+    } else {
+        const user = await User.findOne({
+            username:body.username,
+            password:body.password
+        })
+        if(user) {
+            const userId = user._id;
+            const token = jwt.sign({userId},JWT_SECRET);
+            res.status(200).json({
+                message:"user logged in successfully",
+                token:token
+            })
+        }
+    }
+}
+
