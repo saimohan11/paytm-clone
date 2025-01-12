@@ -15,8 +15,22 @@ const user = new Schema({
         type:String,
         required:true
     }
-})
+});
+
+const acccountSchema = new Schema({
+    userId:{
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+        required:true
+    },
+    balance: {
+        type:Number,
+        default:0,
+        required:true
+    }
+});
 
 const User = model('User',user)
+const Account = model('Account',acccountSchema)
 
-export default User;
+export {User,Account};
