@@ -36,6 +36,12 @@ export const signup = async(req,res)=>{
         })
     
         const userId = user._id;
+              
+        const account = await Account.create({
+            userId:userId,
+            balance: 1 + Math.random() * 10000
+        })
+
         const token = jwt.sign({userId},JWT_SECRET,{expiresIn:"1h"})
         res.status(200).json({
             message:"user created successfully",
