@@ -1,6 +1,6 @@
-import express from 'express';
+import express, { Router } from 'express';
 import bodyParser from 'body-parser';
-import User from '../models/user_db.js';
+import {User,Account} from '../models/user_db.js';
 import { z } from "zod";
 import jwt from "jsonwebtoken"
 import JWT_SECRET from '../config.js';
@@ -73,3 +73,30 @@ export const signin = async(req,res)=>{
     }
 }
 
+const updateSchema = z.object({
+    firstname:z.string(),
+    username:z.string(),
+    password:z.string()
+})
+
+const updateUser = async (req,res)=>{
+    const body = req.body;
+    const result = updateSchema.safeParse(body);
+    if(!result.success) {
+        return res.status(403).json({
+            message:"invalid input"
+        })
+    } else {
+        const update = await User.updateOne(body,{
+            $set:{
+                firstname:body.firstname,
+                username:body.username,
+                password:body.password
+                }
+        })
+        if(update) {
+            res.status(200).json({
+                message:"user updated successfully"
+                })
+    }
+}}
