@@ -17,7 +17,7 @@ const user = new Schema({
     }
 });
 
-const acccountSchema = new Schema({
+const accountSchema = new Schema({
     userId:{
         type: Schema.Types.ObjectId,
         ref: 'User',
@@ -31,6 +31,6 @@ const acccountSchema = new Schema({
 });
 
 const User = model('User',user)
-const Account = model('Account',acccountSchema)
+const Account = model('Account',accountSchema)
 
 export {User,Account};
