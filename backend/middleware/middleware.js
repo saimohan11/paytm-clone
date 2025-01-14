@@ -1,8 +1,8 @@
 import jwt from 'jsonwebtoken'
-import JWT_SECRET from '../config/secret.js'
+import JWT_SECRET from '../config.js'
 
  export const authMiddleWare = (req,res,next)=>{
-    const authHeader = req.header.authorization;
+    const authHeader = req.headers.authorization;
     if(!authHeader || !authHeader.startsWith('Bearer ')) {
         return res.status(403).json({
             error: "No Auth header found"
