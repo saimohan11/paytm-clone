@@ -15,6 +15,8 @@ mongoose.connect(process.env.MONGO_URI)
     console.log(err)
 })
 
+app.use(cors());
+
 app.use(express.json());
 
 app.use("/api/v1",main_router)
