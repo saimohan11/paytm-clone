@@ -42,7 +42,7 @@ export const signup = async(req,res)=>{
             balance: 1 + Math.random() * 10000
         })
 
-        const token = jwt.sign({userId},JWT_SECRET,{expiresIn:"1h"})
+        const token = jwt.sign({userId},JWT_SECRET)
         res.status(200).json({
             message:"user created successfully",
             token:token
@@ -85,7 +85,7 @@ const updateSchema = z.object({
     password:z.string()
 })
 
-const updateUser = async (req,res)=>{
+export const updateUser = async (req,res)=>{
     const body = req.body;
     const result = updateSchema.safeParse(body);
     if(!result.success) {
