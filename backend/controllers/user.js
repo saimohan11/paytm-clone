@@ -110,13 +110,6 @@ export const updateUser = async (req,res)=>{
 export const getUser = async (req,res)=>{
     const filter = req.query.filter || "";
 
-    const users = await User.find([{firstname: {"$regex": filter}}])
-
-    res.json({
-        user: users.map(user => ({
-            username: user.username,
-            firstname: user.firstname,
-            _id: user._id
-        }))
-    })
+    const users = await User.find({firstname: {"$regex": filter}})
+    res.status(200).json(users)
 }
