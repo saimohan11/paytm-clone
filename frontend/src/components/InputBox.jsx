@@ -1,8 +1,8 @@
-export function InputBox({label,placeholder}) {
+export function InputBox({label,placeholder,onChange,type}) {
     return (
-        <div className="flex flex-col px-2">
+        <div className="flex flex-col font-medium">
             {label}
-            <input className="py-1.5 px-2  border-2 border-gray-700" type="text" placeholder={placeholder} required/>
+            <input onChange={onChange} className="py-1.5 rounded-md px-2 border-2 border-gray-700" type={type} placeholder={placeholder} required/>
         </div>
     )
 }
