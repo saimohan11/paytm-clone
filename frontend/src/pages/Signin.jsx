@@ -10,8 +10,9 @@ export function Signin() {
             <div className="w-96 bg-slate-400 border-4 border-stone-600">
             <Heading label={"Signin"}/>
             <SubHeading label="Enter your details to login into your account"/>
-            <InputBox label={"Email"} placeholder={"John3@gmail.com"}/>
-            <InputBox label={"password"} placeholder={"pass@123"}/>
+            <InputBox label={"username"} type={"text"} placeholder={"John3@gmail.com"} onChange={()=>{
+            }}/>
+            <InputBox label={"password"} type={"text"} placeholder={"pass@123"}/>
             <Button label={"Sign in"}/>
             <Warning label={"Do you have an account?"} buttontext={"signup"} to={"/signup"}/>
             </div>
